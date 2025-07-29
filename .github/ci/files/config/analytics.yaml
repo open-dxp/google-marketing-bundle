@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    #
+    # GOOGLE TAG MANAGER
+    #
+    OpenDxp\Bundle\EcommerceFrameworkBundle\EventListener\Frontend\TrackingCodeSubscriber: ~
+
+    OpenDxp\Bundle\GoogleMarketingBundle\Config\ConfigProvider: ~
+    OpenDxp\Bundle\GoogleMarketingBundle\Config\Config:
+        factory: [ '@OpenDxp\Bundle\GoogleMarketingBundle\Config\ConfigProvider', 'getConfig' ]
+
+    OpenDxp\Bundle\GoogleMarketingBundle\Config\SiteConfigProvider: ~
+
+    OpenDxp\Bundle\GoogleMarketingBundle\Tracker\Tracker:
+        calls:
+            - [ setLogger, [ '@logger' ] ]
+
+    # fallback locator which is used from the deprecated OpenDxp\Google\Analytics class
+    opendxp.analytics.google.fallback_service_locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        public: true
+        tags:
+            - { name: container.service_locator }
+

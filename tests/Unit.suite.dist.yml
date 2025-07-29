@@ -1,0 +1,7 @@
+actor: UnitTester
+modules:
+    enabled:
+        - \OpenDxp\Tests\Support\Helper\OpenDxp:
+            connect_db: true
+            cache_router: false
+        - \OpenDxp\Bundle\GoogleMarketingBundle\Tests\Support\Helper\Unit

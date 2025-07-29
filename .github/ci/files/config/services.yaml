@@ -1,0 +1,39 @@
+parameters:
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    #
+    # Installer
+    #
+    OpenDxp\Bundle\GoogleMarketingBundle\Installer:
+        public: true
+        arguments:
+            $bundle: "@=service('kernel').getBundle('OpenDxpGoogleMarketingBundle')"
+
+    #
+    # CONTROLLERS
+    #
+
+    # auto-register all controllers as services
+    OpenDxp\Bundle\GoogleMarketingBundle\Controller\:
+        resource: '../src/Controller'
+        public: true
+        tags: [ 'controller.service_arguments' ]
+
+
+    OpenDxp\Bundle\GoogleMarketingBundle\SiteId\SiteIdProvider: ~
+    OpenDxp\Bundle\GoogleMarketingBundle\Config\ConfigProvider: ~
+    OpenDxp\Bundle\GoogleMarketingBundle\Config\Config:
+        factory: [ '@OpenDxp\Bundle\GoogleMarketingBundle\Config\ConfigProvider', 'getConfig' ]
+
+    OpenDxp\Bundle\GoogleMarketingBundle\Config\SiteConfigProvider: ~
+
+    OpenDxp\Bundle\GoogleMarketingBundle\Tracker\TrackerInterface: '@OpenDxp\Bundle\GoogleMarketingBundle\Tracker\Tracker'
+
+    OpenDxp\Bundle\GoogleMarketingBundle\Tracker\Tracker:
+        calls:
+            - [ setLogger, [ '@logger' ] ]

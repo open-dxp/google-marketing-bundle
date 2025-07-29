@@ -1,0 +1,47 @@
+{
+  "name": "open-dxp/google-marketing-bundle",
+  "license": "GPL-3.0+",
+  "type": "opendxp-bundle",
+  "description": "OpenDXP Google Marketing Bundle provides additional tools for integrating google marketing tools.",
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "open-dxp/opendxp": "source",
+      "*": "dist"
+    }
+  },
+  "require": {
+    "php": "~8.2.0 || ~8.3.0",
+    "open-dxp/opendxp": "^1.0.0",
+    "google/apiclient": "^2.12"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "1.10.5",
+    "phpstan/phpstan-symfony": "^1.2.20",
+    "phpunit/phpunit": "^9.3",
+    "codeception/codeception": "^5.0.10",
+    "codeception/module-symfony":"^3.1.1",
+    "codeception/phpunit-wrapper": "^9",
+    "codeception/module-asserts": "^2"
+  },
+  "autoload": {
+    "psr-4": {
+      "OpenDxp\\Bundle\\GoogleMarketingBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OpenDxp\\Bundle\\GoogleMarketingBundle\\Tests\\": "tests"
+    },
+    "files": [
+      "kernel/Kernel.php"
+    ]
+  },
+  "extra": {
+    "opendxp": {
+      "bundles": [
+        "OpenDxp\\Bundle\\GoogleMarketingBundle\\OpenDxpGoogleMarketingBundle"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to method addSetting\\(\\) on an unknown class OpenDxp\\\\Bundle\\\\AdminBundle\\\\Event\\\\IndexActionSettingsEvent\\.$#"
+			count: 1
+			path: src/EventListener/IndexSettingsListener.php
+
+		-
+			message: "#^Parameter \\$settingsEvent of method OpenDxp\\\\Bundle\\\\GoogleMarketingBundle\\\\EventListener\\\\IndexSettingsListener\\:\\:indexSettings\\(\\) has invalid type OpenDxp\\\\Bundle\\\\AdminBundle\\\\Event\\\\IndexActionSettingsEvent\\.$#"
+			count: 1
+			path: src/EventListener/IndexSettingsListener.php

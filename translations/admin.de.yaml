@@ -1,0 +1,31 @@
+---
+search_console_settings_description: Um die Google Search Console-Integration zu nutzen,
+  konfigurieren Sie bitte das Google API Service-Konto in den Systemeinstellungen
+verification_filename_text: "Dateiname der \xDCberpr\xFCfung<br /><small>f\xFCr die
+  \xDCberpr\xFCfung erforderlich</small>"
+data_explorer: Datei Explorer
+visitor_overview: "Besucher \xDCbersicht"
+analytics_notice: "Bitte lesen Sie zuerst die Dokumentation \xFCber die Google Analytics-Integration,
+  f\xFCr den erweiterten Modus m\xFCssen Sie die Google Analytics-Einstellungen \xE4ndern."
+analytics_settings_description: "Um die vollst\xE4ndige Google Analytics-Integration
+  zu nutzen, konfigurieren Sie bitte das Google API Service-Konto in den Systemeinstellungen"
+only_required_for_reporting_in_opendxp_but_not_for_code_integration: "Die folgenden
+  Angaben sind nur erforderlich, wenn Sie die Berichtsfunktionalit\xE4ten in opendxp
+  nutzen m\xF6chten, f\xFCr die Code-Integration ist dies jedoch nicht erforderlich."
+analytics_trackid_code: "Track-ID (z. B. UA-XXXXX-X)<br /><small>erforderlich f\xFCr
+  die Code-Integration</small>"
+code_settings: Code-Einstellungen
+analytics_universal_configuration: 'Universal/GTag Analytics-Konfiguration z. B. {''cookieDomain'':
+  ''beispiel.com''}'
+code_before_init: Code vor init
+code_after_pageview: Code nach Seitenaufruf
+code_before_pageview: Code vor dem Seitenaufruf
+analytics_gtag_code: "Verwenden Sie den gtag-Code f\xFCr die Analytik"
+analytics_retargeting_code: "Verwenden Sie den Retargeting-Code f\xFCr Analysen (dc.js)"
+analytics_asynchronous_code: "Verwenden Sie den asynchronen Code f\xFCr die Analyse
+  (ga.js)"
+advanced_integration: Erweiterte Integration
+analytics_accountid: Konto-ID (z. B. 1234567)
+analytics_internalid: GA Interne ID
+google_marketing: Google Marketing
+...

@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    OpenDxp\Bundle\GoogleMarketingBundle\EventListener\Frontend\GoogleAnalyticsCodeListener:
+        public: true
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: -110 }
+
+    OpenDxp\Bundle\GoogleMarketingBundle\EventListener\Frontend\GoogleTagManagerListener:
+        public: true
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: -108 }
+
+    OpenDxp\Bundle\GoogleMarketingBundle\EventListener\IndexSettingsListener:
+        tags:
+            - { name: kernel.event_listener, event: opendxp.admin.indexAction.settings, method: indexSettings }

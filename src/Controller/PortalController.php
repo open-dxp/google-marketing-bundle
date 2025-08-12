@@ -21,23 +21,18 @@ use OpenDxp\Controller\Traits\JsonHelperTrait;
 use OpenDxp\Controller\UserAwareController;
 use OpenDxp\Model\Site;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/portal")
- *
  * @internal
  */
+#[Route("/portal")]
 class PortalController extends UserAwareController
 {
     use JsonHelperTrait;
 
-    /**
-     * @Route("/portlet-analytics-sites", name="opendxp_bundle_googlemarketing_portal_portletanalyticssites", methods={"GET"})
-     *
-     *
-     */
+    #[Route('/portlet-analytics-sites', name: 'opendxp_bundle_googlemarketing_portal_portletanalyticssites', methods: ['GET'])]
     public function portletAnalyticsSitesAction(
         TranslatorInterface $translator,
         SiteConfigProvider $siteConfigProvider

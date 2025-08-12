@@ -1,6 +1,6 @@
 _opendxp_bundle_googlemarketing_backend:
     resource: "../../src/Controller/"
-    type:     annotation
+    type:     attribute
     prefix:   /admin/bundle/googlemarketing
     options:
         expose: true

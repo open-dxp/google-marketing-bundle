@@ -30,8 +30,8 @@ use OpenDxp\Http\Request\Resolver\OpenDxpContextResolver;
 use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
-use Symfony\Component\Templating\EngineInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Twig\Environment;
 
 /**
  * @internal
@@ -64,7 +64,7 @@ class GoogleTagManagerListener
     public function __construct(
         private SiteIdProvider $siteIdProvider,
         private EventDispatcherInterface $eventDispatcher,
-        private EngineInterface $templatingEngine
+        private Environment $templatingEngine
     ) {
     }
 

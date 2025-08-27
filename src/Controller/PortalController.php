@@ -27,7 +27,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @internal
  */
-#[Route("/portal")]
+#[Route('/portal')]
 class PortalController extends UserAwareController
 {
     use JsonHelperTrait;

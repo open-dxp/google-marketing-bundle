@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Attribute\Route;
 /**
  * @internal
  */
-#[Route("/settings")]
+#[Route('/settings')]
 class SettingsController extends ReportsControllerBase
 {
     use JsonHelperTrait;
@@ -45,7 +45,7 @@ class SettingsController extends ReportsControllerBase
         return $this->jsonResponse($response);
     }
 
-    #[Route("/save", name: 'opendxp_bundle_googlemarketing_settings_save', methods: ['PUT'])]
+    #[Route('/save', name: 'opendxp_bundle_googlemarketing_settings_save', methods: ['PUT'])]
     public function saveAction(Request $request, ReportConfigWriter $configWriter): JsonResponse
     {
         $this->checkPermission('google_marketing');

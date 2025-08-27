@@ -35,7 +35,7 @@ use Symfony\Component\Routing\Attribute\Route;
 /**
  * @internal
  */
-#[Route("/reports/analytics")]
+#[Route('/reports/analytics')]
 class AnalyticsController extends ReportsControllerBase implements KernelControllerEventInterface
 {
     use JsonHelperTrait;

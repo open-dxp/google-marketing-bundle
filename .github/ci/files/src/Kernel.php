@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * OpenDXP
@@ -15,8 +16,20 @@
 
 namespace App;
 
+use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as BaseKernel;
 
 class Kernel extends BaseKernel
 {
+    /**
+     * Adds bundles to register to the bundle collection. The collection is able
+     * to handle priorities and environment specific bundles.
+     *
+     * @param BundleCollection $collection
+     */
+    public function registerBundlesToCollection(BundleCollection $collection): void
+    {
+        // OpenDXP Bundles
+    }
+
 }

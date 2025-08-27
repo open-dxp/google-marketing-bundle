@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * OpenDXP
@@ -13,30 +14,25 @@
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
+use OpenDxp\Bootstrap;
 use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\Request;
 
-include __DIR__ . '/../vendor/autoload.php';
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
-define('OPENDXP_PROJECT_ROOT', __DIR__ . '/..');
-define('APP_ENV', 'test');
+Bootstrap::setProjectRoot();
 
-\OpenDxp\Bootstrap::setProjectRoot();
-\OpenDxp\Bootstrap::bootstrap();
+return function (Request $request, array $context) {
 
-$request = Request::createFromGlobals();
+    // set current request as property on tool as there's no
+    // request stack available yet
+    Tool::setCurrentRequest($request);
 
-// set current request as property on tool as there's no
-// request stack available yet
-Tool::setCurrentRequest($request);
+    Bootstrap::bootstrap();
+    $kernel = Bootstrap::kernel();
 
-/** @var \OpenDxp\Kernel $kernel */
-$kernel = \OpenDxp\Bootstrap::kernel();
+    // reset current request - will be read from request stack from now on
+    Tool::setCurrentRequest(null);
 
-// reset current request - will be read from request stack from now on
-Tool::setCurrentRequest(null);
-
-$response = $kernel->handle($request);
-$response->send();
-
-$kernel->terminate($request, $response);
+    return $kernel;
+};

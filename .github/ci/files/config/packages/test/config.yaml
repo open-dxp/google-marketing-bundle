@@ -1,6 +1,7 @@
 imports:
     - { resource: ../../config.yaml }
 
+# this cache is used during tests when setting up opendxp
 framework:
     cache:
         pools:
@@ -9,6 +10,7 @@ framework:
                 tags: true
                 default_lifetime: 31536000  # 1 year
                 adapter: cache.adapter.array
+
 
 doctrine:
     dbal:

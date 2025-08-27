@@ -22,7 +22,7 @@ env:
 jobs:
     codeception-tests:
         name: "Codeception tests"
-        runs-on: "ubuntu-20.04"
+        runs-on: "ubuntu-22.04"
         continue-on-error: ${{ matrix.experimental }}
         env:
             OPENDXP_TEST_DB_DSN: "mysql://root@127.0.0.1:33006/opendxp_test"

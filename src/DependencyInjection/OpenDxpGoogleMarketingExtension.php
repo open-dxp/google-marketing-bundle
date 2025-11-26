@@ -26,7 +26,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class OpenDxpGoogleMarketingExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
-
     public function getAlias(): string
     {
         return 'opendxp_google_marketing';

@@ -18,6 +18,7 @@ declare(strict_types=1);
 namespace OpenDxp\Bundle\GoogleMarketingBundle;
 
 use OpenDxp\Bundle\CustomReportsBundle\OpenDxpCustomReportsBundle;
+use OpenDxp\Bundle\GoogleMarketingBundle\DependencyInjection\OpenDxpGoogleMarketingExtension;
 use OpenDxp\Extension\Bundle\AbstractOpenDxpBundle;
 use OpenDxp\Extension\Bundle\Installer;
 use OpenDxp\Extension\Bundle\OpenDxpBundleAdminClassicInterface;
@@ -25,11 +26,21 @@ use OpenDxp\Extension\Bundle\Traits\BundleAdminClassicTrait;
 use OpenDxp\Extension\Bundle\Traits\PackageVersionTrait;
 use OpenDxp\HttpKernel\Bundle\DependentBundleInterface;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class OpenDxpGoogleMarketingBundle extends AbstractOpenDxpBundle implements DependentBundleInterface, OpenDxpBundleAdminClassicInterface
 {
     use BundleAdminClassicTrait;
     use PackageVersionTrait;
+
+    public function getContainerExtension(): ?ExtensionInterface
+    {
+        if (null === $this->extension) {
+            $this->extension = new OpenDxpGoogleMarketingExtension();
+        }
+
+        return $this->extension;
+    }
 
     public function getComposerPackageName(): string
     {

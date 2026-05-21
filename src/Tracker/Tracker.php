@@ -49,12 +49,6 @@ class Tracker extends AbstractTracker
 
     private SiteIdProvider $siteIdProvider;
 
-    private ConfigProvider $configProvider;
-
-    private EventDispatcherInterface $eventDispatcher;
-
-    private Environment $twig;
-
     private ?string $defaultPath = null;
 
     private array $blocks = [
@@ -69,16 +63,13 @@ class Tracker extends AbstractTracker
 
     public function __construct(
         SiteIdProvider $siteIdProvider,
-        ConfigProvider $configProvider,
-        EventDispatcherInterface $eventDispatcher,
-        Environment $twig
+        private ConfigProvider $configProvider,
+        private EventDispatcherInterface $eventDispatcher,
+        private Environment $twig
     ) {
         parent::__construct($siteIdProvider);
 
         $this->siteIdProvider = $siteIdProvider;
-        $this->configProvider = $configProvider;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->twig = $twig;
     }
 
     public function getDefaultPath(): ?string

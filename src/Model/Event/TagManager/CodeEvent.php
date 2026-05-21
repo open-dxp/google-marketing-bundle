@@ -22,23 +22,15 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class CodeEvent extends Event
 {
-    private array $data;
-
-    /**
-     * @var CodeBlock[]
-     */
-    private array $blocks;
-
-    private string $template;
-
     public function __construct(
-        array $data,
-        array $blocks,
-        string $template
-    ) {
-        $this->data = $data;
-        $this->blocks = $blocks;
-        $this->template = $template;
+        private array $data,
+        /**
+         * @var CodeBlock[]
+         */
+        private array $blocks,
+        private string $template
+    )
+    {
     }
 
     public function getData(): array

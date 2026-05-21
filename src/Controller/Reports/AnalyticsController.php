@@ -100,7 +100,7 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
             }
 
             return $this->jsonResponse($data);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return $this->jsonResponse(false);
         }
     }
@@ -127,7 +127,7 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
 
             if ($siteId = $request->get('site')) {
                 $site = Site::getById((int) $siteId);
-                $path = preg_replace('@^' . preg_quote($site->getRootPath(), '@') . '/@', '/', $path);
+                $path = preg_replace('@^' . preg_quote((string) $site->getRootPath(), '@') . '/@', '/', $path);
             }
 
             return $path;
@@ -145,8 +145,8 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
         $endDate = date('Y-m-d');
 
         if ($request->get('dateFrom') && $request->get('dateTo')) {
-            $startDate = date('Y-m-d', strtotime($request->get('dateFrom')));
-            $endDate = date('Y-m-d', strtotime($request->get('dateTo')));
+            $startDate = date('Y-m-d', strtotime((string) $request->get('dateFrom')));
+            $endDate = date('Y-m-d', strtotime((string) $request->get('dateTo')));
         }
 
         $metrics = ['ga:pageviews'];
@@ -194,7 +194,7 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
             $date = $row[0];
 
             $tmpData = [
-                'timestamp' => strtotime($date),
+                'timestamp' => strtotime((string) $date),
                 'datetext' => $this->formatDimension('date', $date),
             ];
 
@@ -221,8 +221,8 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
         $endDate = date('Y-m-d');
 
         if ($request->get('dateFrom') && $request->get('dateTo')) {
-            $startDate = date('Y-m-d', strtotime($request->get('dateFrom')));
-            $endDate = date('Y-m-d', strtotime($request->get('dateTo')));
+            $startDate = date('Y-m-d', strtotime((string) $request->get('dateFrom')));
+            $endDate = date('Y-m-d', strtotime((string) $request->get('dateTo')));
         }
 
         if ($filterPath = $this->getFilterPath($request)) {
@@ -292,8 +292,8 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
         $endDate = date('Y-m-d');
 
         if ($request->get('dateFrom') && $request->get('dateTo')) {
-            $startDate = date('Y-m-d', strtotime($request->get('dateFrom')));
-            $endDate = date('Y-m-d', strtotime($request->get('dateTo')));
+            $startDate = date('Y-m-d', strtotime((string) $request->get('dateFrom')));
+            $endDate = date('Y-m-d', strtotime((string) $request->get('dateTo')));
         }
 
         if ($filterPath = $this->getFilterPath($request)) {
@@ -343,8 +343,8 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
         $limit = 10;
 
         if ($request->get('dateFrom') && $request->get('dateTo')) {
-            $startDate = date('Y-m-d', strtotime($request->get('dateFrom')));
-            $endDate = date('Y-m-d', strtotime($request->get('dateTo')));
+            $startDate = date('Y-m-d', strtotime((string) $request->get('dateFrom')));
+            $endDate = date('Y-m-d', strtotime((string) $request->get('dateTo')));
         }
         if ($request->get('dimension')) {
             $dimension = $request->get('dimension');
@@ -425,7 +425,7 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
 
     protected function formatDimension(string $type, string $value): string
     {
-        if (strpos($type, 'date') !== false) {
+        if (str_contains($type, 'date')) {
             $date = new \DateTime();
             $date->setTimestamp(strtotime($value));
 

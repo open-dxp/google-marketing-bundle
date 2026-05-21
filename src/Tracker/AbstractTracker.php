@@ -22,13 +22,10 @@ use OpenDxp\Bundle\GoogleMarketingBundle\SiteId\SiteIdProvider;
 
 abstract class AbstractTracker implements TrackerInterface
 {
-    private SiteIdProvider $siteIdProvider;
-
     private ?CodeCollector $codeCollector = null;
 
-    public function __construct(SiteIdProvider $siteIdProvider)
+    public function __construct(private readonly SiteIdProvider $siteIdProvider)
     {
-        $this->siteIdProvider = $siteIdProvider;
     }
 
     public function generateCode(?SiteId $siteId = null): ?string

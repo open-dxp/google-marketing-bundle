@@ -23,11 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SiteIdProvider
 {
-    private SiteResolver $siteResolver;
-
-    public function __construct(SiteResolver $siteResolver)
+    public function __construct(private readonly SiteResolver $siteResolver)
     {
-        $this->siteResolver = $siteResolver;
     }
 
     /**

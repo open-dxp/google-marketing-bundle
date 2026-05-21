@@ -31,9 +31,9 @@ class CodeCollector
 
     const ACTION_APPEND = 'append';
 
-    private string $defaultBlock;
+    private readonly string $defaultBlock;
 
-    private array $validBlocks;
+    private readonly array $validBlocks;
 
     private array $codeParts = [];
 

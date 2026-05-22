@@ -1,3 +1,6 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - phpstan-baseline.neon
 parameters:
     level: 6
     reportUnmatchedIgnoredErrors: false
@@ -8,6 +11,3 @@ parameters:
     ignoreErrors:
         - identifier: missingType.iterableValue
         - identifier: missingType.generics
-includes:
-    - vendor/phpstan/phpstan-symfony/extension.neon
-    - phpstan-baseline.neon

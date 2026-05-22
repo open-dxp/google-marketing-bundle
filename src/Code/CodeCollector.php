@@ -10,13 +10,14 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle\Code;
 
+use InvalidArgumentException;
+use LogicException;
 use OpenDxp\Bundle\GoogleMarketingBundle\SiteId\SiteId;
 
 /**
@@ -45,7 +46,7 @@ class CodeCollector
     public function __construct(array $validBlocks, string $defaultBlock)
     {
         if (!in_array($defaultBlock, $validBlocks)) {
-            throw new \LogicException(sprintf(
+            throw new LogicException(sprintf(
                 'The default block "%s" must be a part of the valid blocks',
                 $defaultBlock
             ));
@@ -63,7 +64,7 @@ class CodeCollector
     public function addCodePart(string $code, ?string $block = null, string $action = self::ACTION_APPEND, ?SiteId $siteId = null): void
     {
         if (!in_array($action, $this->validActions)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Invalid action "%s". Valid actions are: %s',
                 $action,
                 implode(', ', $this->validActions)
@@ -80,7 +81,7 @@ class CodeCollector
         }
 
         if (!in_array($block, $this->validBlocks)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Invalid block "%s". Valid values are: %s',
                 $block,
                 implode(', ', $this->validBlocks)
@@ -104,7 +105,6 @@ class CodeCollector
 
     /**
      * Adds registered parts to a code block
-     *
      */
     public function enrichCodeBlock(SiteId $siteId, CodeBlock $codeBlock, string $block): void
     {

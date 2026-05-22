@@ -10,14 +10,15 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle;
 
+use OpenDxp;
 use OpenDxp\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
+use Override;
 
 class Installer extends SettingsStoreAwareInstaller
 {
@@ -50,7 +51,7 @@ class Installer extends SettingsStoreAwareInstaller
         }
     }
 
-    #[\Override]
+    #[Override]
     public function install(): void
     {
         $this->addPermissions();
@@ -61,13 +62,13 @@ class Installer extends SettingsStoreAwareInstaller
     public function installDependentBundles(): void
     {
         //Install CustomReportsBundle
-        $customReportsInstaller = \OpenDxp::getContainer()->get(\OpenDxp\Bundle\CustomReportsBundle\Installer::class);
+        $customReportsInstaller = OpenDxp::getContainer()->get(\OpenDxp\Bundle\CustomReportsBundle\Installer::class);
         if (!$customReportsInstaller->isInstalled()) {
             $customReportsInstaller->install();
         }
     }
 
-    #[\Override]
+    #[Override]
     public function uninstall(): void
     {
         $this->removePermissions();

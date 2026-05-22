@@ -10,18 +10,19 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle\Code;
 
+use Stringable;
+
 /**
  * Represents a single template block. Parts are represented as array and concatenated
  * with newlines on render.
  */
-final class CodeBlock implements \Stringable
+final class CodeBlock implements Stringable
 {
     public function __construct(private array $parts = [])
     {

@@ -10,13 +10,14 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle\Controller\Reports;
 
+use DateTime;
+use Exception;
 use Google\Service\Analytics;
 use OpenDxp\Bundle\GoogleMarketingBundle\Api\Api;
 use OpenDxp\Bundle\GoogleMarketingBundle\Chart\ImageChart;
@@ -100,7 +101,7 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
             }
 
             return $this->jsonResponse($data);
-        } catch (\Exception) {
+        } catch (Exception) {
             return $this->jsonResponse(false);
         }
     }
@@ -426,7 +427,7 @@ class AnalyticsController extends ReportsControllerBase implements KernelControl
     protected function formatDimension(string $type, string $value): string
     {
         if (str_contains($type, 'date')) {
-            $date = new \DateTime();
+            $date = new DateTime();
             $date->setTimestamp(strtotime($value));
 
             return $date->format('Y-m-d');

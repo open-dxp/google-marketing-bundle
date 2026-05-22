@@ -9,14 +9,15 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle\Api;
 
+use Exception;
 use Google\Client;
+use OpenDxp;
 use OpenDxp\Config;
 use OpenDxp\Model\Tool\TmpStore;
 use Psr\Cache\CacheItemPoolInterface;
@@ -32,7 +33,7 @@ class Api
 
     public static function getConfig(): array
     {
-        return \OpenDxp::getContainer()->getParameter('opendxp_google_marketing');
+        return OpenDxp::getContainer()->getParameter('opendxp_google_marketing');
     }
 
     public static function isConfigured(string $type = 'service'): bool
@@ -67,7 +68,6 @@ class Api
     }
 
     /**
-     *
      * @return Client|false returns false, if client not configured
      */
     public static function getClient(string $type = 'service'): Client|bool
@@ -80,7 +80,6 @@ class Api
     }
 
     /**
-     *
      * @return Client|false
      */
     public static function getServiceClient(?array $scope = null): Client|bool
@@ -99,7 +98,7 @@ class Api
         $client = new Client();
 
         /** @var CacheItemPoolInterface $cache */
-        $cache = \OpenDxp::getContainer()->get('opendxp.cache.pool');
+        $cache = OpenDxp::getContainer()->get('opendxp.cache.pool');
         $client->setCache($cache);
 
         $client->setApplicationName('opendxp CMF');
@@ -146,7 +145,7 @@ class Api
         $client = new Client();
 
         /** @var CacheItemPoolInterface $cache */
-        $cache = \OpenDxp::getContainer()->get('opendxp.cache.pool');
+        $cache = OpenDxp::getContainer()->get('opendxp.cache.pool');
         $client->setCache($cache);
 
         $client->setApplicationName('opendxp CMF');
@@ -156,8 +155,7 @@ class Api
     }
 
     /**
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function getAnalyticsDimensions(): array
     {
@@ -165,8 +163,7 @@ class Api
     }
 
     /**
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function getAnalyticsMetrics(): array
     {
@@ -174,27 +171,24 @@ class Api
     }
 
     /**
-     *
-     * @throws \Exception
-     * @throws \Exception
+     * @throws Exception
+     * @throws Exception
      */
     public static function getAnalyticsMetadata(): mixed
     {
-        $client = \OpenDxp::getContainer()->get('opendxp.http_client');
+        $client = OpenDxp::getContainer()->get('opendxp.http_client');
         $result = $client->get(self::ANALYTICS_API_URL.'metadata/ga/columns');
 
         return json_decode((string)$result->getBody(), true);
     }
 
     /**
-     *
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     protected static function getAnalyticsMetadataByType(string $type): array
     {
         $data = self::getAnalyticsMetadata();
-        $translator = \OpenDxp::getContainer()->get('translator');
+        $translator = OpenDxp::getContainer()->get('translator');
 
         $result = [];
         foreach ($data['items'] as $item) {

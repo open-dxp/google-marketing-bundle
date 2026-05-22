@@ -9,15 +9,19 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle\CustomReport\Adapter;
 
+use ArrayAccess;
+use DateInterval;
+use DateTime;
+use Exception;
 use OpenDxp\Bundle\CustomReportsBundle\Tool\Adapter\AbstractAdapter;
 use OpenDxp\Bundle\GoogleMarketingBundle\Api\Api;
+use stdClass;
 
 /**
  * @internal
@@ -47,7 +51,7 @@ class Analytics extends AbstractAdapter
         return ['data' => $data, 'total' => $results['totalResults']];
     }
 
-    public function getColumns(?\stdClass $configuration): array
+    public function getColumns(?stdClass $configuration): array
     {
         $result = $this->getDataHelper();
         $columns = [];
@@ -100,9 +104,7 @@ class Analytics extends AbstractAdapter
     }
 
     /**
-     *
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getDataHelper(?array $fields = null, ?array $drillDownFilters = null, bool $useDimensionHandling = true): \Google\Service\Analytics\GaData
     {
@@ -118,17 +120,17 @@ class Analytics extends AbstractAdapter
 
         $client = Api::getServiceClient();
         if (!$client) {
-            throw new \Exception('Google Analytics is not configured');
+            throw new Exception('Google Analytics is not configured');
         }
 
         $service = new \Google\Service\Analytics($client);
 
         if (!$configuration->profileId) {
-            throw new \Exception('no profileId given');
+            throw new Exception('no profileId given');
         }
 
         if (!$configuration->metric) {
-            throw new \Exception('no metric given');
+            throw new Exception('no metric given');
         }
 
         $options = [];
@@ -156,18 +158,18 @@ class Analytics extends AbstractAdapter
         $configuration->endDate = $this->calcDate($configuration->endDate, $configuration->relativeEndDate);
 
         if (!$configuration->startDate) {
-            throw new \Exception('no start date given');
+            throw new Exception('no start date given');
         }
 
         if (!$configuration->endDate) {
-            throw new \Exception('no end date given');
+            throw new Exception('no end date given');
         }
 
         return $service->data_ga->get('ga:' . $configuration->profileId, date('Y-m-d', $configuration->startDate), date('Y-m-d', $configuration->endDate),
             (is_array($configuration->metric) ? implode(',', $configuration->metric) : $configuration->metric), $options);
     }
 
-    protected function extractData(\ArrayAccess $results): array
+    protected function extractData(ArrayAccess $results): array
     {
         $data = [];
 
@@ -184,7 +186,7 @@ class Analytics extends AbstractAdapter
         return $data;
     }
 
-    protected function handleFields(\stdClass $configuration, array $fields): \stdClass
+    protected function handleFields(stdClass $configuration, array $fields): stdClass
     {
         $metrics = $configuration->metric;
         foreach ($metrics as $key => $metric) {
@@ -205,7 +207,7 @@ class Analytics extends AbstractAdapter
         return $configuration;
     }
 
-    protected function handleDimensions(\stdClass $configuration): \stdClass
+    protected function handleDimensions(stdClass $configuration): stdClass
     {
         $dimension = $configuration->dimension;
         if (count($dimension)) {
@@ -237,19 +239,19 @@ class Analytics extends AbstractAdapter
                         $applyModifiers[] = [
                             'sign'   => $matches[1],
                             'number' => $matches[2],
-                            'type'   => $matches[3]
+                            'type'   => $matches[3],
                         ];
                     }
                 }
             }
 
             if (count($applyModifiers)) {
-                $currentDate = new \DateTime();
+                $currentDate = new DateTime();
                 foreach ($applyModifiers as $modifier) {
                     if ($modifier['sign'] === '-') {
-                        $currentDate->sub(new \DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
+                        $currentDate->sub(new DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
                     } else {
-                        $currentDate->add(new \DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
+                        $currentDate->add(new DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
                     }
                 }
 

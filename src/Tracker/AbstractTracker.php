@@ -9,8 +9,7 @@ declare(strict_types=1);
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) Pimcore GmbH (https://pimcore.com)
- * @copyright  Modification Copyright (c) OpenDXP (https://www.opendxp.ch)
+ * @copyright  Copyright (c) OpenDXP (https://www.opendxp.io)
  * @license    https://www.gnu.org/licenses/gpl-3.0.html  GNU General Public License version 3 (GPLv3)
  */
 
@@ -39,8 +38,6 @@ abstract class AbstractTracker implements TrackerInterface
 
     /**
      * Generates code for a specific site config
-     *
-     *
      */
     abstract protected function buildCode(SiteId $siteId): ?string;
 
@@ -53,7 +50,6 @@ abstract class AbstractTracker implements TrackerInterface
 
     /**
      * Lazy initialize the code collector
-     *
      */
     protected function getCodeCollector(): CodeCollector
     {
@@ -67,7 +63,6 @@ abstract class AbstractTracker implements TrackerInterface
     /**
      * Builds the code collector which allows to add additional content to
      * specific blocks.
-     *
      */
     abstract protected function buildCodeCollector(): CodeCollector;
 }

@@ -23,10 +23,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('opendxp_google_marketing');
+        $node = $treeBuilder->getRootNode();
 
-        $treeBuilder
-            ->getRootNode()
-            ->addDefaultsIfNotSet()
+        $node
             ->children()
                 ->scalarNode('client_id')
                     ->info('This is required for the Google API integrations. Only use a `Service Account´ from the Google Cloud Console.')

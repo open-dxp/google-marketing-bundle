@@ -38,8 +38,10 @@ class OpenDxpGoogleMarketingExtension extends ConfigurableExtension implements P
             $container,
             new FileLocator(__DIR__ . '/../../config')
         );
+
         $loader->load('services.yaml');
         $loader->load('analytics.yaml');
+
         $this->configureGoogleAnalyticsFallbackServiceLocator($container);
 
         $container->setParameter('opendxp_google_marketing', $config);
@@ -72,7 +74,7 @@ class OpenDxpGoogleMarketingExtension extends ConfigurableExtension implements P
                 new FileLocator(__DIR__ . '/../../config')
             );
 
-            $loader->load('admin-classic.yaml');
+            $loader->load('admin-bundle.yaml');
         }
 
     }

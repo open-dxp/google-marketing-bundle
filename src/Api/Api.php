@@ -115,7 +115,7 @@ class Api
         $tokenId = 'google-api.token.' . $hash;
         $token = null;
         if ($tokenData = TmpStore::get($tokenId)) {
-            $tokenInfo = json_decode($tokenData->getData(), true);
+            $tokenInfo = json_decode((string) $tokenData->getData(), true);
             if (((int)$tokenInfo['created'] + (int)$tokenInfo['expires_in']) > (time() - 900)) {
                 $token = $tokenData->getData();
             }
@@ -199,7 +199,7 @@ class Api
         $result = [];
         foreach ($data['items'] as $item) {
             if ($item['attributes']['type'] == $type) {
-                if (strpos($item['id'], 'XX') !== false) {
+                if (str_contains((string) $item['id'], 'XX')) {
                     for ($i = 1; $i <= 5; $i++) {
                         $replace = (string) $i;
                         $name = str_replace('1', $replace, str_replace('01', $replace, $translator->trans($item['attributes']['uiName'], [], 'admin')));

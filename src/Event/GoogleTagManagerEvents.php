@@ -23,18 +23,14 @@ final class GoogleTagManagerEvents
      * snippets to the head code.
      *
      * @Event("OpenDxp\Bundle\GoogleMarketingBundle\Model\Event\CodeEvent")
-     *
-     * @var string
      */
-    const CODE_HEAD = 'opendxp.analytics.google.tag_manager.code_head';
+    const string CODE_HEAD = 'opendxp.analytics.google.tag_manager.code_head';
 
     /**
      * Triggered before the tag manager body code is rendered. Can be used to add additional code
      * snippets to the body code.
      *
      * @Event("OpenDxp\Bundle\GoogleMarketingBundle\Model\Event\TagManager\CodeEvent")
-     *
-     * @var string
      */
-    const CODE_BODY = 'opendxp.analytics.google.tag_manager.code_body';
+    const string CODE_BODY = 'opendxp.analytics.google.tag_manager.code_body';
 }

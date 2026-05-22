@@ -24,8 +24,6 @@ final class GoogleAnalyticsEvents
      * snippets to the tracking block.
      *
      * @Event("OpenDxp\Bundle\GoogleMarketingBundle\Model\Event\TrackingDataEvent")
-     *
-     * @var string
      */
-    const CODE_TRACKING_DATA = 'opendxp.tracking.google.code.tracking_data';
+    const string CODE_TRACKING_DATA = 'opendxp.tracking.google.code.tracking_data';
 }

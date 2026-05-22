@@ -22,16 +22,10 @@ class ConfigProvider
     private ?Config $config = null;
 
     /**
-     * @var array<string, mixed>|null
-     */
-    private ?array $configObject = null;
-
-    /**
      * @param array<string, mixed>|null $configObject
      */
-    public function __construct(?array $configObject = null)
+    public function __construct(private ?array $configObject = null)
     {
-        $this->configObject = $configObject;
     }
 
     public function getConfig(): Config

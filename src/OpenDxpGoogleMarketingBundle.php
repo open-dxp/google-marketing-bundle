@@ -33,6 +33,7 @@ class OpenDxpGoogleMarketingBundle extends AbstractOpenDxpBundle implements Depe
     use BundleAdminClassicTrait;
     use PackageVersionTrait;
 
+    #[\Override]
     public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->extension) {
@@ -47,6 +48,7 @@ class OpenDxpGoogleMarketingBundle extends AbstractOpenDxpBundle implements Depe
         return 'open-dxp/google-marketing-bundle';
     }
 
+    #[\Override]
     public function getPath(): string
     {
         return \dirname(__DIR__);

@@ -21,13 +21,10 @@ namespace OpenDxp\Bundle\GoogleMarketingBundle\Code;
  * Represents a single template block. Parts are represented as array and concatenated
  * with newlines on render.
  */
-final class CodeBlock
+final class CodeBlock implements \Stringable
 {
-    private array $parts = [];
-
-    public function __construct(array $parts = [])
+    public function __construct(private array $parts = [])
     {
-        $this->parts = $parts;
     }
 
     public function setParts(array $parts): void
@@ -67,7 +64,7 @@ final class CodeBlock
         return $string;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->asString();
     }

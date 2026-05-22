@@ -65,7 +65,7 @@ class Analytics extends AbstractAdapter
         if (count($filters)) {
             foreach ($filters as $filter) {
                 if ($filter['type'] === 'string') {
-                    $value = str_replace(';', '', addslashes($filter['value']));
+                    $value = str_replace(';', '', addslashes((string) $filter['value']));
                     $gaFilters[] = "{$filter['field']}=~{$value}";
                 } elseif ($filter['type'] === 'numeric') {
                     $value = (float)$filter['value'];
@@ -225,7 +225,7 @@ class Analytics extends AbstractAdapter
 
     protected function calcDate(int $date, string $relativeDate): float|int
     {
-        if (strpos($relativeDate, '-') !== false || strpos($relativeDate, '+') !== false) {
+        if (str_contains($relativeDate, '-') || str_contains($relativeDate, '+')) {
             $modifiers = explode(' ', str_replace('  ', ' ', $relativeDate));
 
             $applyModifiers = [];

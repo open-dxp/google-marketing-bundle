@@ -29,8 +29,8 @@ class Analytics extends AbstractAdapter
         $this->setFilters($filters, $drillDownFilters);
 
         if ($sort) {
-            $dir = $dir == 'DESC' ? '-' : '';
-            $this->config->sort = $dir.$sort;
+            $dir = $dir === 'DESC' ? '-' : '';
+            $this->config->sort = $dir . $sort;
         }
 
         if ($offset) {
@@ -44,7 +44,7 @@ class Analytics extends AbstractAdapter
         $results = $this->getDataHelper($fields, $drillDownFilters);
         $data = $this->extractData($results);
 
-        return [ 'data' => $data, 'total' => $results['totalResults'] ];
+        return ['data' => $data, 'total' => $results['totalResults']];
     }
 
     public function getColumns(?\stdClass $configuration): array
@@ -61,14 +61,14 @@ class Analytics extends AbstractAdapter
 
     protected function setFilters(array $filters, array $drillDownFilters = []): void
     {
-        $gaFilters = [ $this->config->filters ];
+        $gaFilters = [$this->config->filters];
         if (count($filters)) {
             foreach ($filters as $filter) {
                 if ($filter['type'] === 'string') {
                     $value = str_replace(';', '', addslashes((string) $filter['value']));
                     $gaFilters[] = "{$filter['field']}=~{$value}";
                 } elseif ($filter['type'] === 'numeric') {
-                    $value = (float)$filter['value'];
+                    $value = (float) $filter['value'];
                     $compMapping = [
                         'lt' => '<',
                         'gt' => '>',
@@ -163,7 +163,8 @@ class Analytics extends AbstractAdapter
             throw new \Exception('no end date given');
         }
 
-        return $service->data_ga->get('ga:'.$configuration->profileId, date('Y-m-d', $configuration->startDate), date('Y-m-d', $configuration->endDate), (is_array($configuration->metric) ? implode(',', $configuration->metric) : $configuration->metric), $options);
+        return $service->data_ga->get('ga:' . $configuration->profileId, date('Y-m-d', $configuration->startDate), date('Y-m-d', $configuration->endDate),
+            (is_array($configuration->metric) ? implode(',', $configuration->metric) : $configuration->metric), $options);
     }
 
     protected function extractData(\ArrayAccess $results): array
@@ -209,7 +210,7 @@ class Analytics extends AbstractAdapter
         $dimension = $configuration->dimension;
         if (count($dimension)) {
             foreach ($this->fullConfig->getColumnConfiguration() as $column) {
-                if ($column['filter_drilldown'] == 'only_filter') {
+                if ($column['filter_drilldown'] === 'only_filter') {
                     foreach ($dimension as $key => $dim) {
                         if ($dim == $column['name']) {
                             unset($dimension[$key]);
@@ -232,27 +233,27 @@ class Analytics extends AbstractAdapter
             foreach ($modifiers as $modifier) {
                 $modifier = trim($modifier);
                 if (preg_match('/^([+-])(\d+)([dmy])$/', $modifier, $matches)) {
-                    if (in_array($matches[1], ['+', '-']) && is_numeric($matches[2])
-                        && in_array($matches[3], ['d', 'm', 'y'])
-                    ) {
-                        $applyModifiers[] = ['sign' => $matches[1], 'number' => $matches[2],
-                            'type' => $matches[3], ];
+                    if (in_array($matches[1], ['+', '-']) && in_array($matches[3], ['d', 'm', 'y'])) {
+                        $applyModifiers[] = [
+                            'sign'   => $matches[1],
+                            'number' => $matches[2],
+                            'type'   => $matches[3]
+                        ];
                     }
                 }
             }
 
             if (count($applyModifiers)) {
-                $date = new \DateTime();
-
+                $currentDate = new \DateTime();
                 foreach ($applyModifiers as $modifier) {
-                    if ($modifier['sign'] == '-') {
-                        $date->sub(new \DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
+                    if ($modifier['sign'] === '-') {
+                        $currentDate->sub(new \DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
                     } else {
-                        $date->add(new \DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
+                        $currentDate->add(new \DateInterval('P' . $modifier['number'] . strtoupper($modifier['type'])));
                     }
                 }
 
-                return $date->getTimestamp();
+                return $currentDate->getTimestamp();
             }
         }
 

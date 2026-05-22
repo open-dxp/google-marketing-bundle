@@ -1,12 +1,13 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - phpstan-baseline.neon
 parameters:
     level: 6
     reportUnmatchedIgnoredErrors: false
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
     paths:
         - src
     bootstrapFiles:
         - phpstan-bootstrap.php
-includes:
-    - vendor/phpstan/phpstan-symfony/extension.neon
-    - phpstan-baseline.neon
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics

@@ -15,7 +15,6 @@
 
 namespace OpenDxp\Bundle\GoogleMarketingBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -24,12 +23,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('opendxp_google_marketing');
+        $node = $treeBuilder->getRootNode();
 
-        /** @var ArrayNodeDefinition $rootNode */
-        $rootNode = $treeBuilder->getRootNode();
-        $rootNode->addDefaultsIfNotSet();
-
-        $rootNode
+        $node
             ->children()
                 ->scalarNode('client_id')
                     ->info('This is required for the Google API integrations. Only use a `Service Account´ from the Google Cloud Console.')

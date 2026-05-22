@@ -70,7 +70,6 @@ class SiteIdProvider
      */
     public function getSiteIds(bool $includeMainDomain = true): array
     {
-        /** @var Site\Listing|Site\Listing\Dao $sites */
         $sites = new Site\Listing();
 
         $ids = [];

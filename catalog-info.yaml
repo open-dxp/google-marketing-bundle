@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    name: google-marketing-bundle
+spec:
+    type: library
+    lifecycle: production
+    owner: team-opendxp
+    system: opendxp

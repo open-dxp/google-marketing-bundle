@@ -29,8 +29,10 @@ class SiteId
 {
     const CONFIG_KEY_MAIN_DOMAIN = 'site_0';
 
-    private function __construct(private readonly string $configKey, private readonly ?Site $site = null)
-    {
+    private function __construct(
+        private readonly string $configKey,
+        private readonly ?Site $site = null
+    ) {
     }
 
     public static function forMainDomain(): self

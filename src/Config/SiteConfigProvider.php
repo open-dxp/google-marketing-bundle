@@ -23,8 +23,10 @@ use OpenDxp\Model\Site;
 
 class SiteConfigProvider
 {
-    public function __construct(private readonly SiteIdProvider $siteIdProvider, private readonly ConfigProvider $configProvider)
-    {
+    public function __construct(
+        private readonly SiteIdProvider $siteIdProvider,
+        private readonly ConfigProvider $configProvider
+    ) {
     }
 
     public function getSiteConfig(?Site $site = null): ?array

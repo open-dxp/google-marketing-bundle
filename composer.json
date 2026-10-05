@@ -20,7 +20,7 @@
         "google/apiclient": "^2.12"
     },
     "require-dev": {
-        "open-dxp/test-foundation": "1.x-dev",
+        "open-dxp/test-foundation": "^1.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-symfony": "^2.0.15",
         "symfony/dotenv": "^7.4",

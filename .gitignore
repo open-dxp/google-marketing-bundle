@@ -6,7 +6,6 @@ Thumbs.db
 /.web-server-pid
 /app/config/parameters.yml
 /build/
-/phpunit.xml
 /web/bundles/
 
 # local config
@@ -55,12 +54,12 @@ nbproject
 
 node_modules/
 
-# codeception (only stage *.dist.yml config files)
-/codeception.yml
-/opendxp/codeception.yml
-/opendxp/tests/*.suite.yml
-/opendxp/tests/_output/*
-/opendxp/tests/_support/_generated/*
+######################
+# Tests              #
+######################
+# only the *.dist configuration is staged
+/phpunit.xml
+/.phpunit.cache/
 
 # keep legacy paths ignored for easier migration
 /plugins/
@@ -79,3 +78,7 @@ node_modules/
 /auth.json
 /config.json
 .php-cs-fixer.cache
+
+# agent instructions stay local
+/CLAUDE.md
+/.claude/

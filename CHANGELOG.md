@@ -1,6 +1,7 @@
 # Changelog
 
 ## 1.1.1
+- [CHORE] Show placeholders instead of example credentials in the commented default configuration
 - [CHORE] Check dependencies, code and commits for security issues
 
 ## 1.1.0

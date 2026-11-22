@@ -13,3 +13,4 @@
 /CLA.md export-ignore
 /CONTRIBUTING.md export-ignore
 /phpstan* export-ignore
+/psalm-taint-baseline.xml export-ignore

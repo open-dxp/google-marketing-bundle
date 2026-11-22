@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="7.13.2">
+  <file src="src/Controller/Reports/AnalyticsController.php">
+    <TaintedUrlComponent>
+      <code>$url</code>
+    </TaintedUrlComponent>
+  </file>
+</files>
